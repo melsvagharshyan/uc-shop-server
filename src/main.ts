@@ -8,8 +8,12 @@ async function bootstrap() {
   app.enableCors({
     origin: ['https://uc-shop-fe.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    credentials: true, // if you use cookies or authorization headers
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'], // Make sure headers you want are allowed
+    preflightContinue: false, // Let NestJS handle the preflight
+    optionsSuccessStatus: 204, // Set the response status for OPTIONS requests
   });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

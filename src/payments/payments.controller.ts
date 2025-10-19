@@ -7,8 +7,8 @@ export class PaymentsController {
 
   @Post('create')
   createPayment(@Body() body: { orderId: string; amount: number }) {
-    // const url = this.paymentsService.createPayment(body.orderId, body.amount);
-    // return { url };
+    const url = this.paymentsService.createPayment(body.orderId, body.amount);
+    return { url };
   }
 
   @Get('callback')
