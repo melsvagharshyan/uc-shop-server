@@ -11,11 +11,16 @@ async function bootstrap() {
     express.urlencoded({ limit: '50mb', extended: true }),
   );
 
-  app.enableCors({
-    origin: ['https://uc-shop-fe.vercel.app'], // your deployed frontend
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://uc-shop-fe.vercel.app');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header(
+      'Access-Control-Allow-Methods',
+      'GET, POST, PUT, DELETE, OPTIONS',
+    );
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
   });
 
   await app.listen(process.env.PORT ?? 3000);
