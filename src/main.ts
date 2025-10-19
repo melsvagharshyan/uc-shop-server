@@ -12,10 +12,12 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    allowedHeaders: '*',
-    origin: '*',
+    origin: ['https://uc-shop-fe.vercel.app'], // your deployed frontend
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
