@@ -12,9 +12,9 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ['https://uc-shop-fe.vercel.app/'],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    credentials: true, // if you use cookies or authorization headers
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
   });
   await app.listen(process.env.PORT ?? 3000);
 }
